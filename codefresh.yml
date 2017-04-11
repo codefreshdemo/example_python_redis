@@ -1,0 +1,30 @@
+version: '1.0'
+steps:
+  build_prj:
+    type: build
+    dockerfile: Dockerfile
+    image_name: web
+    tag: ${{CF_BRANCH}}
+
+  build_test:
+    type: build
+    dockerfile: Dockerfile.test
+    image_name: test
+    tag: ${{CF_BRANCH}}
+
+  unit_test:
+    type: composition
+    composition:
+      version: '2'
+      services:
+        web:
+          image: ${{build_prj}}
+          links:
+            - redis
+          ports:
+            - "80:80"
+        redis:
+          image: redis
+    composition_candidates:
+      test:
+        image: ${{build_test}}
