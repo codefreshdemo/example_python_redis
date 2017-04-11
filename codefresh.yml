@@ -22,7 +22,7 @@ steps:
           links:
             - redis
           ports:
-            - "80:80"
+            - 80
         redis:
           image: redis
     composition_candidates:
