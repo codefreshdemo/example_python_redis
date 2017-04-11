@@ -17,8 +17,14 @@ steps:
     composition:
       version: '2'
       services:
-        test:
-          image: ${{build_test}}
+        web:
+          image: ${{build_prj}}
+          links:
+            - redis
+          ports:
+            - 80
+        redis:
+          image: redis
     composition_candidates:
       test:
         image: ${{build_test}}
