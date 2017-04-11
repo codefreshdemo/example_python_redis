@@ -17,6 +17,8 @@ steps:
     composition:
       version: '2'
       services:
+        test:
+          image: ${{build_test}}
     composition_candidates:
       test:
         image: ${{build_test}}
