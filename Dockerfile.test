@@ -2,6 +2,9 @@ FROM ubuntu:trusty
 
 RUN apt-get update && apt-get install -yq curl && apt-get clean
 
+RUN apt-get install -y netcat
+RUN apt-get install -y dnsutils
+
 WORKDIR /app
 
 ADD test.sh /app/test.sh
